@@ -157,6 +157,7 @@ section {
 	color: #2b96fe;
 	margin-left: 100px;
 	margin-bottom: 10px;
+	display: none;
 }
 
 .chat_client .message .text {
