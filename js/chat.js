@@ -17,7 +17,24 @@ function getMessages() {
 
 // login() logs in a user by creating a session
 function login() {
+	$('#login').submit(function(event){
+		event.preventDefault();
+		var form = $('#login');
+		var username = form.find('input[name="username"]');
+		var password = form.find('input[name="password"]');
 
+		$.ajax({
+			url: form.attr('action'),
+			type: form.attr('method'),
+			data: form.serialize(),
+			success: function(data) {
+				console.log(data);
+			},
+			error: function(data) {
+				console.log(data);
+			}
+		});
+	};
 }
 
 // signup() creates an account that we can sign in with

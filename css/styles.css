@@ -20,7 +20,6 @@ textarea {
    v2.0 | 20110126
    License: none (public domain)
 */
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -151,7 +150,7 @@ section {
 	margin: 0 auto;
 	background: rgba(0,0,0,0.2);
 	box-sizing: border-box;
-	padding: 50px;
+	padding: 20px 50px;
 	border-radius: 20px;
 	overflow: auto;
 }
