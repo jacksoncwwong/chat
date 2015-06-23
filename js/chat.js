@@ -8,13 +8,13 @@ var site = "http://chat-app.brainstation.io";
 function sendMessage() {
 	event.preventDefault();
 	var form = $('#entry');
-	var entry = form.find('input[name="entry"]').val();
+	var entry = form.find('input[name="message"]').val();
 	console.log(entry);
 
 	$.ajax({
 		url: site + "/messages",
 		type: "POST",
-		data: form.serialize(),
+		data: {'userID':CURRENT_USER, 'message':entry},
 		xhrFields: { withCredentials:true },
 		success: function(data) {
 			console.log(data);
