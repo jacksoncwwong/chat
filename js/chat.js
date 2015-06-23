@@ -5,8 +5,14 @@ var CURRENT_USER = null;
 
 // sendMessage() sends a message to the API
 function sendMessage() {
-
+	event.preventDefault();
+	var form = $('#entry');
+	var entry = form.find('input[name="entry"]').val();
+	console.log(entry);
 }
+$('#entry').on('submit', function(event){
+	sendMessage();
+});
 
 // getMessages() gets all messages from the API.
 // we can use diff() to get only the new ones.
@@ -14,29 +20,28 @@ function getMessages() {
 
 }
 
-
 // login() logs in a user by creating a session
 function login() {
-		event.preventDefault();
-		var form = $('#login');
-		var username = form.find('input[name="username"]').val();
-		console.log(username);
+	event.preventDefault();
+	var form = $('#login');
+	var username = form.find('input[name="username"]').val();
+	console.log(username);
 
-		$.ajax({
-			url: "http://chat-app.brainstation.io/users/login",
-			type: "POST",
-			data: form.serialize(),
-			xhrFields: { withCredentials:true },
-			success: function(data) {
-				CURRENT_USER = data.uid;
-				$('#login').css('display','none');
-				$('.username').append("Username: " + username);
-				$('.username').css('display','inline-block');
-			},
-			error: function(data) {
-				console.log(data);
-			}
-		});
+	$.ajax({
+		url: "http://chat-app.brainstation.io/users/login",
+		type: "POST",
+		data: form.serialize(),
+		xhrFields: { withCredentials:true },
+		success: function(data) {
+			CURRENT_USER = data.uid;
+			$('#login').css('display','none');
+			$('.username').append("Username: " + username);
+			$('.username').css('display','inline-block');
+		},
+		error: function(data) {
+			console.log(data);
+		}
+	});
 }
 $('#login').on('submit', function(event){
 	login();
@@ -44,7 +49,6 @@ $('#login').on('submit', function(event){
 
 // signup() creates an account that we can sign in with
 function signup() {
-	$('login')
 
 }
 
