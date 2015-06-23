@@ -13,7 +13,16 @@ function sendMessage() {
 
 	$.ajax({
 		url: site + "/messages",
-	})
+		type: "POST",
+		data: form.serialize(),
+		xhrFields: { withCredentials:true },
+		success: function(data) {
+			console.log(data);
+		},
+		error: function(data) {
+			console.log(data);
+		}
+	});
 }
 $('#entry').on('submit', function(event){
 	sendMessage();
