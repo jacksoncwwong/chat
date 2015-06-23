@@ -2,6 +2,7 @@
 // (a good idea to store the information you need
 // when sending messages here)
 var CURRENT_USER = null;
+var site = "http://chat-app.brainstation.io";
 
 // sendMessage() sends a message to the API
 function sendMessage() {
@@ -9,6 +10,10 @@ function sendMessage() {
 	var form = $('#entry');
 	var entry = form.find('input[name="entry"]').val();
 	console.log(entry);
+
+	$.ajax({
+		url: site + "/messages",
+	})
 }
 $('#entry').on('submit', function(event){
 	sendMessage();
@@ -28,7 +33,7 @@ function login() {
 	console.log(username);
 
 	$.ajax({
-		url: "http://chat-app.brainstation.io/users/login",
+		url: site + "/users/login",
 		type: "POST",
 		data: form.serialize(),
 		xhrFields: { withCredentials:true },
