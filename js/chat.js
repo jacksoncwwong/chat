@@ -17,28 +17,34 @@ function getMessages() {
 
 // login() logs in a user by creating a session
 function login() {
-	$('#login').submit(function(event){
 		event.preventDefault();
 		var form = $('#login');
-		var username = form.find('input[name="username"]');
-		var password = form.find('input[name="password"]');
+		var username = form.find('input[name="username"]').val();
+		console.log(username);
 
 		$.ajax({
-			url: form.attr('action'),
-			type: form.attr('method'),
+			url: "http://chat-app.brainstation.io/users/login",
+			type: "POST",
 			data: form.serialize(),
+			xhrFields: { withCredentials:true },
 			success: function(data) {
-				console.log(data);
+				CURRENT_USER = data.uid;
+				$('#login').css('display','none');
+				$('.username').append("Username: " + username);
+				$('.username').css('display','inline-block');
 			},
 			error: function(data) {
 				console.log(data);
 			}
 		});
-	};
 }
+$('#login').on('submit', function(event){
+	login();
+});
 
 // signup() creates an account that we can sign in with
 function signup() {
+	$('login')
 
 }
 

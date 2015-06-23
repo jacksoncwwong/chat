@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <video autoplay loop muted poster="polina.jpg" id="bgvid">
+    <video autoplay loop muted poster="" id="bgvid">
         <source src="img/funny_dog.mp4" type="video/mp4">
     </video>
     <section>
@@ -18,12 +18,12 @@
             <h1>When your code blows up and you need someone to talk to</h1>
         </div>
         <div class="user_info">
-            <form id="login" action="http://chat-app.brainstation.io/users/login" method="POST">
+            <form id="login">
                 <input type="text" name="username" placeholder="Username" class="form-control">
                 <input type="password" name="password" placeholder="Password" class="form-control">
                 <input type="submit" class="btn">
             </form>
-            <div class="username">Username: Jackson</div>
+            <div class="username"></div>
         </div>
         <div class="chat_client">
             <div class="message">
@@ -44,69 +44,9 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, officiis pariatur neque. Repudiandae quo sunt voluptate, quam adipisci deserunt mollitia officia maxime. Soluta, laudantium sunt. Quibusdam earum quasi, ea ipsa.</p>
                 </div>
             </div>
-            <div class="message">
-                <div class="user">
-                    <div class="user_img"><img src="img/minion.jpeg"></div>
-                    <div class="username">Testing</div>
-                </div>
-                <div class="text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, officiis pariatur neque. Repudiandae quo sunt voluptate, quam adipisci deserunt mollitia officia maxime. Soluta, laudantium sunt. Quibusdam earum quasi, ea ipsa.</p>
-                </div>
-            </div>
-            <div class="message">
-                <div class="user">
-                    <div class="user_img"><img src="img/minion.jpeg"></div>
-                    <div class="username">Testing</div>
-                </div>
-                <div class="text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, officiis pariatur neque. Repudiandae quo sunt voluptate, quam adipisci deserunt mollitia officia maxime. Soluta, laudantium sunt. Quibusdam earum quasi, ea ipsa.</p>
-                </div>
-            </div>
-            <div class="message">
-                <div class="user">
-                    <div class="user_img"><img src="img/minion.jpeg"></div>
-                    <div class="username">Testing</div>
-                </div>
-                <div class="text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, officiis pariatur neque. Repudiandae quo sunt voluptate, quam adipisci deserunt mollitia officia maxime. Soluta, laudantium sunt. Quibusdam earum quasi, ea ipsa.</p>
-                </div>
-            </div>
-            <div class="message">
-                <div class="user">
-                    <div class="user_img"><img src="img/minion.jpeg"></div>
-                    <div class="username">Testing</div>
-                </div>
-                <div class="text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, officiis pariatur neque. Repudiandae quo sunt voluptate, quam adipisci deserunt mollitia officia maxime. Soluta, laudantium sunt. Quibusdam earum quasi, ea ipsa.</p>
-                </div>
-            </div>
-            <div class="message">
-                <div class="user">
-                    <div class="user_img"><img src="img/minion.jpeg"></div>
-                    <div class="username">Testing</div>
-                </div>
-                <div class="text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, officiis pariatur neque. Repudiandae quo sunt voluptate, quam adipisci deserunt mollitia officia maxime. Soluta, laudantium sunt. Quibusdam earum quasi, ea ipsa.</p>
-                </div>
-            </div>
-            <div class="message">
-                <div class="user">
-                    <div class="user_img"><img src="img/minion.jpeg"></div>
-                    <div class="username">Testing</div>
-                </div>
-                <div class="text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, officiis pariatur neque. Repudiandae quo sunt voluptate, quam adipisci deserunt mollitia officia maxime. Soluta, laudantium sunt. Quibusdam earum quasi, ea ipsa.</p>
-                </div>
-            </div>
-            <div class="message">
-                <div class="user">
-                    <div class="user_img"><img src="img/minion.jpeg"></div>
-                    <div class="username">Testing</div>
-                </div>
-                <div class="text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, officiis pariatur neque. Repudiandae quo sunt voluptate, quam adipisci deserunt mollitia officia maxime. Soluta, laudantium sunt. Quibusdam earum quasi, ea ipsa.</p>
-                </div>
-            </div>
+            <form id="entry">
+				<input type="text" name="entry">
+            </form>
         </div>
     </section>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
