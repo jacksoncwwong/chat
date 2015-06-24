@@ -83,7 +83,23 @@ $('#login').on('submit', function(event){
 
 // signup() creates an account that we can sign in with
 function signup() {
+	event.preventDefault();
+	var form = $('#signup');
 
+	$.ajax({
+		url: site + "/users",
+		type: "POST",
+		data: form.serialize(),
+		xhrFields: {withCredentials:true },
+		success: function(data) {
+			console.log(data);
+			$('#signup').css('display','none');
+			$('#login').css('display','block');
+		},
+		error: function(data) {
+			console.log(data);
+		}
+	})
 }
 
 // HELPERS -------

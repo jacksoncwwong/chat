@@ -116,16 +116,20 @@ section {
 	padding: 30px 0;
 }
 
+#signup, 
 #login {
 	width: 500px;
 	margin: 0 auto;
+	display: none;
 }
 
+#signup input, 
 #login input {
 	width: 30%;
 	display: inline-block;
 }
 
+#signup input[type="submit"], 
 #login input[type="submit"] {
 	width: auto;
 	padding: 5px 10px;
@@ -134,7 +138,7 @@ section {
 	vertical-align: top;
 }
 
-#signup {
+#login {
 	display: none;
 }
 
