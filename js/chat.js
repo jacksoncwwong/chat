@@ -3,6 +3,7 @@
 // when sending messages here)
 var CURRENT_USER = null;
 var site = "http://chat-app.brainstation.io";
+var username = "";
 
 // sendMessage() sends a message to the API
 function sendMessage() {
@@ -19,10 +20,8 @@ function sendMessage() {
 		xhrFields: { withCredentials:true },
 		success: function(data) {
 			console.log(data);
+			$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + username + '</div></div><div class="text"><p>' + entry + '</p></div></div>');
 			input.val("");
-			console.log(input);
-
-			// need to add new message
 		},
 		error: function(data) {
 			console.log(data);
@@ -58,7 +57,7 @@ function getMessages() {
 function login() {
 	event.preventDefault();
 	var form = $('#login');
-	var username = form.find('input[name="username"]').val();
+	username = form.find('input[name="username"]').val();
 	console.log(username);
 
 	$.ajax({
