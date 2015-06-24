@@ -207,6 +207,7 @@ section {
 	background: rgba(0,0,0,0.2);
 	border: 0;
 	border-top: 1px solid black;
+	color: white;
 }
 
 #entry input:focus {
