@@ -134,6 +134,10 @@ section {
 	vertical-align: top;
 }
 
+#signup {
+	display: none;
+}
+
 .user_info .username {
 	background: rgba(0,0,0,0.2);
 	padding: 5px 10px;
