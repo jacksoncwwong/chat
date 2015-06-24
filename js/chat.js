@@ -19,7 +19,8 @@ function sendMessage() {
 		xhrFields: { withCredentials:true },
 		success: function(data) {
 			console.log(data);
-			input.html('');
+			input.val("");
+			console.log(input);
 
 			// need to add new message
 		},
