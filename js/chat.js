@@ -24,8 +24,8 @@ function sendMessage() {
 		data: {'userID':CURRENT_USER, 'message':entry},
 		xhrFields: { withCredentials:true },
 		success: function(data) {
-			//I may need to sort first
-			updateMessages();
+			$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + data.username + '</div><div class="time">' + getReadableTime(data.timestamp) + '</div></div><div class="text"><p>' + data.message + '</p></div></div>');
+			currentMessages.push(data);
 			input.val("");
 		},
 		error: function(data) {
@@ -37,7 +37,7 @@ $('#entry').on('submit', function(event){
 	sendMessage();
 });
 
-// sort messages parameters
+// parameters for sorting array of messages based on timestamp
 function sortTime(a, b){
 	var aTime = a.timestamp;
 	var bTime = b.timestamp; 
@@ -132,21 +132,20 @@ function updateMessages() {
 		type: "GET",
 		success: function(data) {
 			var diffMessages = diff(data, currentMessages);
-			var currentLength = currentMessages.length;
-			currentMessages.sort(sortTime);
-			console.log(diffMessages);
-			if (diffMessages.length > 0 && diffMessages[0].id != currentMessages[currentLength].id) {
-				console.log(diffMessages[0].id);
-				console.log(currentMessages[currentLength].id);
-				$('.chat_client').html('');
-				console.log("this is rewriting");
-				getMessages();
-			}
-			else if (diffMessages.length > 0) {
-				for(var i=0; i<diffMessages.length; i++) {
-					$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + diffMessages[i].username + '</div></div><div class="text"><p>' + diffMessages[i].message + '</p></div></div>');
+			if (diffMessages.length > 0) {
+				currentMessages.sort(sortTime);
+				var currentLength = currentMessages.length - 1;
+				if (diffMessages[0].timestamp < currentMessages[currentLength].timestamp) {
+					console.log("this is rewrite");
+					getMessages();
 				}
-				scrollUpdate(chatDiv, 1000);
+				else {
+					for (var i=0; i<diffMessages.length; i++) {
+						console.log("no rewrite");
+						$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + diffMessages[i].username + '</div><div class="time">' + getReadableTime(diffMessages[i].timestamp) + '</div></div><div class="text"><p>' + diffMessages[i].message + '</p></div></div>');
+						currentMessages.push(diffMessages[i]);
+					}
+				}
 			}
 		},
 		error: function(data) {
