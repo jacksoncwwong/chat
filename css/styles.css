@@ -91,8 +91,7 @@ section {
 
 .logo {
 	margin: 0 auto;
-	padding-top: 30px;
-	width: 280px;
+	width: 160px;
 	text-align: center;
 }
 
@@ -100,26 +99,49 @@ section {
 	max-width: 100%;
 }
 
+.header,
+.user_info {
+	background: rgba(0,0,0,0.2);
+	border-radius: 20px;
+	width: 40%;
+	margin: 10px auto;
+}
+
 .header {
 	text-align: center;
+	width: 60%;
+	padding: 20px 0;
 }
 
 .header h1 {
-	font-size: 26px;
-	font-weight: 300;
+	font-size: 22px;
+	font-weight: 700;
 	color: #2b96fe;
 	margin-top: 20px;
 }
 
 .user_info {
 	text-align: center;
-	padding: 30px 0;
+	padding: 10px 0;
 }
 
 #signup, 
 #login {
 	width: 500px;
 	margin: 0 auto;
+}
+
+#signup h3, 
+#login h3 {
+	color: white;
+	margin-bottom: 5px;
+}
+
+#signup a {
+	text-decoration: none;
+	font-size: 10px;
+	display: block;
+	margin-top: 5px;
 }
 
 #signup input, 

@@ -4,6 +4,11 @@
 var CURRENT_USER = null;
 var site = "http://chat-app.brainstation.io";
 var username = "";
+$('#signup a').click(function(){
+	$('#signup').css('display','none');
+	$('#login').css('display','block');
+});
+
 
 // sendMessage() sends a message to the API
 function sendMessage() {
@@ -46,6 +51,8 @@ function getMessages() {
 			data.forEach(function(element) {
 				$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + element.username + '</div><div class="time">' + getReadableTime(element.timestamp) + '</div></div><div class="text"><p>' + element.message + '</p></div></div>');
 			});
+			var chatDiv = $('.chat_client');
+			scrollBottom(chatDiv, 2000);
 		},
 		error: function(data) {
 			console.log(data);
