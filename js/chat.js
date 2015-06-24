@@ -145,6 +145,7 @@ function updateMessages() {
 						console.log("no rewrite");
 						$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + diffMessages[i].username + '</div><div class="time">' + getReadableTime(diffMessages[i].timestamp) + '</div></div><div class="text"><p>' + diffMessages[i].message + '</p></div></div>');
 						currentMessages.push(diffMessages[i]);
+						scrollBottom(chatDiv, 1000);
 					}
 				}
 			}
