@@ -20,7 +20,7 @@ function sendMessage() {
 		xhrFields: { withCredentials:true },
 		success: function(data) {
 			console.log(data);
-			$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + username + '</div></div><div class="text"><p>' + entry + '</p></div></div>');
+			$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + data.username + '</div></div><div class="text"><p>' + data.message + '</p></div></div>');
 			input.val("");
 		},
 		error: function(data) {
@@ -44,7 +44,7 @@ function getMessages() {
 			console.log(data);
 
 			data.forEach(function(element) {
-				$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + element.username + '</div></div><div class="text"><p>' + element.message + '</p></div></div>')
+				$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + element.username + '</div><div class="time">' + getReadableTime(element.timestamp) + '</div></div><div class="text"><p>' + element.message + '</p></div></div>');
 			});
 		},
 		error: function(data) {

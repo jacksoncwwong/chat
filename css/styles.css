@@ -161,6 +161,10 @@ section {
 	min-height: 80px;
 }
 
+.chat_client .message .user {
+	position: relative;
+}
+
 .chat_client .user_img {
 	width: 80px;
 	float: left;
@@ -175,6 +179,13 @@ section {
 	color: #2b96fe;
 	margin-left: 100px;
 	margin-bottom: 10px;
+}
+
+.chat_client .time {
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: white;
 }
 
 .chat_client .message .text {
