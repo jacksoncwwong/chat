@@ -17,7 +17,6 @@ function sendMessage() {
 	var form = $('#entry');
 	var input = $('#entry input');
 	var entry = form.find('input[name="message"]').val();
-	console.log(entry);
 
 	$.ajax({
 		url: site + "/messages",
@@ -25,11 +24,9 @@ function sendMessage() {
 		data: {'userID':CURRENT_USER, 'message':entry},
 		xhrFields: { withCredentials:true },
 		success: function(data) {
-			console.log(data);
-			$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + data.username + '</div></div><div class="text"><p>' + data.message + '</p></div></div>');
-			input.val("");
+			//I may need to sort first
 			updateMessages();
-			scrollBottom(chatDiv, 1000);
+			input.val("");
 		},
 		error: function(data) {
 			console.log(data);
@@ -61,10 +58,8 @@ function getMessages() {
 		url: site + "/messages",
 		type: "GET",
 		success: function(data) {
-			console.log(data);
 			data.sort(sortTime);
 			currentMessages = data;
-			console.log(currentMessages);
 
 			data.forEach(function(element) {
 				$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + element.username + '</div><div class="time">' + getReadableTime(element.timestamp) + '</div></div><div class="text"><p>' + element.message + '</p></div></div>');
@@ -82,7 +77,6 @@ function login() {
 	event.preventDefault();
 	var form = $('#login');
 	username = form.find('input[name="username"]').val();
-	console.log(username);
 
 	$.ajax({
 		url: site + "/users/login",
@@ -117,7 +111,6 @@ function signup() {
 		data: form.serialize(),
 		xhrFields: {withCredentials:true },
 		success: function(data) {
-			console.log(data);
 			$('#signup').css('display','none');
 			$('#login').css('display','block');
 		},
@@ -138,18 +131,23 @@ function updateMessages() {
 		url: site + "/messages",
 		type: "GET",
 		success: function(data) {
-			console.log(diff(data, currentMessages));
 			var diffMessages = diff(data, currentMessages);
-
-			if (diffMessages.length >0) {
-				for(var i=0; i<diffMessages.length; i++) {
-
-				}
+			var currentLength = currentMessages.length;
+			currentMessages.sort(sortTime);
+			console.log(diffMessages);
+			if (diffMessages.length > 0 && diffMessages[0].id != currentMessages[currentLength].id) {
+				console.log(diffMessages[0].id);
+				console.log(currentMessages[currentLength].id);
+				$('.chat_client').html('');
+				console.log("this is rewriting");
+				getMessages();
 			}
-
-			for(var i=0; i<diffMessages.length; i++) {
-				$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + diffMessages[i].username + '</div></div><div class="text"><p>' + diffMessages[i].message + '</p></div></div>');
-			};
+			else if (diffMessages.length > 0) {
+				for(var i=0; i<diffMessages.length; i++) {
+					$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + diffMessages[i].username + '</div></div><div class="text"><p>' + diffMessages[i].message + '</p></div></div>');
+				}
+				scrollUpdate(chatDiv, 1000);
+			}
 		},
 		error: function(data) {
 			console.log(data);
@@ -176,6 +174,11 @@ function diff(a, b) {
 // Helper - scrolls to the bottom of the messages div
 function scrollBottom(element, duration) {
 	element.animate({ scrollTop: element[0].scrollHeight}, duration);
+}
+
+function scrollUpdate(element, duration) {
+	var scrollStart = element.length - 1;
+	element.animate({ scrollTop: element[scrollStart].scrollHeight}, duration);
 }
 
 // Helper - turns JavaScript timestamp into something useful
