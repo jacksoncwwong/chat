@@ -204,6 +204,13 @@ section {
 	padding: 20px 50px;
 	border-radius: 0 0 20px 20px;
 	width: 80%;
+	background: rgba(0,0,0,0.2);
+	border: 0;
+	border-top: 1px solid black;
+}
+
+#entry input:focus {
+	outline: none;
 }
 
 
