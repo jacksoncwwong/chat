@@ -8,6 +8,7 @@ var site = "http://chat-app.brainstation.io";
 function sendMessage() {
 	event.preventDefault();
 	var form = $('#entry');
+	var input = $('#entry input');
 	var entry = form.find('input[name="message"]').val();
 	console.log(entry);
 
@@ -18,6 +19,9 @@ function sendMessage() {
 		xhrFields: { withCredentials:true },
 		success: function(data) {
 			console.log(data);
+			input.html('');
+
+			// need to add new message
 		},
 		error: function(data) {
 			console.log(data);
