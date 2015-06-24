@@ -117,7 +117,7 @@ function getReadableTime(stamp) {
 // Helper - pads a number with zeros to a certain size. Useful for time values like 10:30.
 function pad(num, size) {
     var s = num+"";
-    while (s.length < size) s = s + "0";
+    while (s.length < size) s = "0" + s;
     return s;
 }
 
