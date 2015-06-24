@@ -53,10 +53,10 @@ function getMessages() {
 			  var aTime = a.timestamp;
 			  var bTime = b.timestamp; 
 			  if (aTime < bTime) {
-			  	return 1;
+			  	return -1;
 			  }
 			  else {
-			  	return -1;
+			  	return 1;
 			  }
 			}
 
