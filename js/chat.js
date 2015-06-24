@@ -9,7 +9,6 @@ $('#signup a').click(function(){
 	$('#login').css('display','block');
 });
 
-
 // sendMessage() sends a message to the API
 function sendMessage() {
 	event.preventDefault();
@@ -47,6 +46,21 @@ function getMessages() {
 		type: "GET",
 		success: function(data) {
 			console.log(data);
+
+			//need to write function that sorts data array by timestamp
+			//This will sort your array
+			function sortTime(a, b){
+			  var aTime = a.timestamp;
+			  var bTime = b.timestamp; 
+			  if (aTime < bTime) {
+			  	return 1;
+			  }
+			  else {
+			  	return -1;
+			  }
+			}
+
+			data.sort(sortTime);
 
 			data.forEach(function(element) {
 				$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + element.username + '</div><div class="time">' + getReadableTime(element.timestamp) + '</div></div><div class="text"><p>' + element.message + '</p></div></div>');
