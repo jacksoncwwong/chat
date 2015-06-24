@@ -24,8 +24,9 @@ function sendMessage() {
 		data: {'userID':CURRENT_USER, 'message':entry},
 		xhrFields: { withCredentials:true },
 		success: function(data) {
-			$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + data.username + '</div><div class="time">' + getReadableTime(data.timestamp) + '</div></div><div class="text"><p>' + data.message + '</p></div></div>');
-			currentMessages.push(data);
+			// $('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + data.username + '</div><div class="time">' + getReadableTime(data.timestamp) + '</div></div><div class="text"><p>' + data.message + '</p></div></div>');
+			// currentMessages.push(data);
+			updateMessages();
 			input.val("");
 		},
 		error: function(data) {
