@@ -101,6 +101,9 @@ function signup() {
 		}
 	})
 }
+$('#signup').on('submit', function(event){
+	signup();
+});
 
 // HELPERS -------
 // You can use these and modify them to fit your needs. 
