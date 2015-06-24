@@ -31,7 +31,22 @@ $('#entry').on('submit', function(event){
 // getMessages() gets all messages from the API.
 // we can use diff() to get only the new ones.
 function getMessages() {
+	event.preventDefault();
 
+	$.ajax({
+		url: site + "/messages",
+		type: "GET",
+		success: function(data) {
+			console.log(data);
+
+			data.forEach(function(element) {
+				$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + element.username + '</div></div><div class="text"><p>' + element.message + '</p></div></div>')
+			});
+		},
+		error: function(data) {
+			console.log(data);
+		}
+	});
 }
 
 // login() logs in a user by creating a session
@@ -51,6 +66,7 @@ function login() {
 			$('#login').css('display','none');
 			$('.username').append("Username: " + username);
 			$('.username').css('display','inline-block');
+			getMessages();
 		},
 		error: function(data) {
 			console.log(data);

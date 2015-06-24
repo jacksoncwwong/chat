@@ -152,6 +152,7 @@ section {
 	padding: 20px 50px;
 	border-radius: 20px;
 	overflow: auto;
+	position: relative;
 }
 
 .chat_client .message {
@@ -183,7 +184,10 @@ section {
 	line-height: 16px;
 }
 
-
+.chat_client #entry {
+	position: absolute;
+	bottom: 0;
+}
 
 
 
