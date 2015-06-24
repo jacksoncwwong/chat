@@ -3,7 +3,9 @@
 // when sending messages here)
 var CURRENT_USER = null;
 var site = "http://chat-app.brainstation.io";
+var chatDiv = $('.chat_client');
 var username = "";
+var currentMessages = [];
 $('#signup a').click(function(){
 	$('#signup').css('display','none');
 	$('#login').css('display','block');
@@ -26,6 +28,8 @@ function sendMessage() {
 			console.log(data);
 			$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + data.username + '</div></div><div class="text"><p>' + data.message + '</p></div></div>');
 			input.val("");
+			updateMessages();
+			scrollBottom(chatDiv, 1000);
 		},
 		error: function(data) {
 			console.log(data);
@@ -35,6 +39,18 @@ function sendMessage() {
 $('#entry').on('submit', function(event){
 	sendMessage();
 });
+
+// sort messages parameters
+function sortTime(a, b){
+	var aTime = a.timestamp;
+	var bTime = b.timestamp; 
+	if (aTime < bTime) {
+		return -1;
+	}
+	else {
+		return 1;
+	}
+}
 
 // getMessages() gets all messages from the API.
 // we can use diff() to get only the new ones.
@@ -46,27 +62,14 @@ function getMessages() {
 		type: "GET",
 		success: function(data) {
 			console.log(data);
-
-			//need to write function that sorts data array by timestamp
-			//This will sort your array
-			function sortTime(a, b){
-			  var aTime = a.timestamp;
-			  var bTime = b.timestamp; 
-			  if (aTime < bTime) {
-			  	return -1;
-			  }
-			  else {
-			  	return 1;
-			  }
-			}
-
 			data.sort(sortTime);
+			currentMessages = data;
+			console.log(currentMessages);
 
 			data.forEach(function(element) {
 				$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + element.username + '</div><div class="time">' + getReadableTime(element.timestamp) + '</div></div><div class="text"><p>' + element.message + '</p></div></div>');
 			});
-			var chatDiv = $('.chat_client');
-			scrollBottom(chatDiv, 2000);
+			scrollBottom(chatDiv, 1000);
 		},
 		error: function(data) {
 			console.log(data);
@@ -92,6 +95,7 @@ function login() {
 			$('.username').append("Username: " + username);
 			$('.username').css('display','inline-block');
 			getMessages();
+			setInterval(updateMessages(), 2000);
 		},
 		error: function(data) {
 			console.log(data);
@@ -120,11 +124,38 @@ function signup() {
 		error: function(data) {
 			console.log(data);
 		}
-	})
+	});
 }
 $('#signup').on('submit', function(event){
 	signup();
 });
+
+// updateMessages() checks current array of messages and compares it 
+//to array of messages on server, and will rewrite if array is completely different, 
+//or write in new messages
+function updateMessages() {
+	$.ajax({
+		url: site + "/messages",
+		type: "GET",
+		success: function(data) {
+			console.log(diff(data, currentMessages));
+			var diffMessages = diff(data, currentMessages);
+
+			if (diffMessages.length >0) {
+				for(var i=0; i<diffMessages.length; i++) {
+
+				}
+			}
+
+			for(var i=0; i<diffMessages.length; i++) {
+				$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + diffMessages[i].username + '</div></div><div class="text"><p>' + diffMessages[i].message + '</p></div></div>');
+			};
+		},
+		error: function(data) {
+			console.log(data);
+		}
+	});
+}
 
 // HELPERS -------
 // You can use these and modify them to fit your needs. 
