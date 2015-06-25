@@ -112,6 +112,7 @@ function login() {
 		url: site + "/users/login",
 		type: "POST",
 		data: form.serialize(),
+		xhrFields: { withCredentials:true },
 		success: function(data) {
 			CURRENT_USER = data.uid;
 			$('#login').css('display','none');
