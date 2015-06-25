@@ -189,6 +189,7 @@ function updateMessages() {
 			type: "GET",
 			success: function(data) {
 				var diffMessages = diff(data, currentMessages);
+				var checkDelete = diff(currentMessages, data);
 				if (diffMessages.length > 0) {
 					currentMessages.sort(sortTime);
 					var currentLength = currentMessages.length - 1;
@@ -196,7 +197,6 @@ function updateMessages() {
 					if (diffMessages[0].timestamp < currentMessages[currentLength].timestamp) {
 						console.log("this is rewrite");
 						getMessages();
-						conosole.log("SOmething new");
 					}
 					//the above code using diff() does not detect message deletion
 					else {
@@ -212,6 +212,10 @@ function updateMessages() {
 							scrollBottom(chatDiv, 1000);
 						}
 					}
+				}
+				else if (checkDelete.length > 0) {
+					getMessages();
+					console.log("messages have been deleted");
 				}
 			},
 			error: function(data) {
