@@ -87,7 +87,7 @@ function login() {
 		success: function(data) {
 			CURRENT_USER = data.uid;
 			$('#login').css('display','none');
-			$('.username').append('Username: ' + username + '<a href="#">Log Out</a>');
+			$('.username').append('Username: ' + username + '<a href="#" id="logout">Log Out</a>');
 			$('.username').css('display','inline-block');
 			getMessages();
 			setInterval(updateMessages(), 2000);
@@ -99,6 +99,29 @@ function login() {
 }
 $('#login').on('submit', function(event){
 	login();
+});
+
+// logout() logs out a user
+function logout() {
+	event.preventDefault();
+
+	$.ajax({
+		url: site + "/users/logout",
+		type: "POST",
+		xhrFields: { withCredentials:true },
+		success: function() {
+			console.log('logged out');
+			CURRENT_USER = "";
+			$('.username').css('display','none');
+			$('#signup').css('display','block');
+			$('.chat_client').html('');
+		},
+		error: function() {
+		}
+	});
+}
+$('#logout').click(function(event){
+	logout();
 });
 
 // signup() creates an account that we can sign in with
