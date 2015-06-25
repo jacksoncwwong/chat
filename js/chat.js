@@ -24,6 +24,7 @@ function sendMessage() {
 		data: {'userID':CURRENT_USER, 'message':entry},
 		xhrFields: { withCredentials:true },
 		success: function(data) {
+			// the code below does not check for any new messages
 			// $('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + data.username + '</div><div class="time">' + getReadableTime(data.timestamp) + '</div></div><div class="text"><p>' + data.message + '</p></div></div>');
 			// currentMessages.push(data);
 			updateMessages();
@@ -63,7 +64,11 @@ function getMessages() {
 			currentMessages = data;
 
 			data.forEach(function(element) {
-				$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + element.username + '</div><div class="time">' + getReadableTime(element.timestamp) + '</div></div><div class="text"><p>' + element.message + '</p></div></div>');
+				$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + element.username + '</div><div class="time">' + getReadableTime(element.timestamp) + '</div></div><div class="text"><p>' + element.message + '</p><a class="delete" href="#">Delete</a><div class="messageID">' +element.id+ '</div></div>');
+			});
+			$('.delete').click(function(event){ //binding listener to delete class
+				var deleteID = .closest() ;
+				delete();
 			});
 			scrollBottom(chatDiv, 1000);
 		},
@@ -71,6 +76,12 @@ function getMessages() {
 			console.log(data);
 		}
 	});
+}
+
+// delete() deletes the message
+function delete() {
+	event.preventDefault();
+
 }
 
 // login() logs in a user by creating a session
@@ -167,7 +178,7 @@ function updateMessages() {
 				else {
 					for (var i=0; i<diffMessages.length; i++) {
 						console.log("no rewrite");
-						$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + diffMessages[i].username + '</div><div class="time">' + getReadableTime(diffMessages[i].timestamp) + '</div></div><div class="text"><p>' + diffMessages[i].message + '</p></div></div>');
+						$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + diffMessages[i].username + '</div><div class="time">' + getReadableTime(diffMessages[i].timestamp) + '</div></div><div class="text"><p>' + diffMessages[i].message + '</p><a class="delete" href="#">Delete</a><div class="messageID">' +element.id+ '</div></div>');
 						currentMessages.push(diffMessages[i]);
 						scrollBottom(chatDiv, 1000);
 					}

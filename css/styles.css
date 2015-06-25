@@ -240,6 +240,14 @@ section {
 	line-height: 16px;
 }
 
+.chat_client .message .delete {
+
+}
+
+.chat_client .message .messageID {
+	display: none;
+}
+
 #entry {
 	text-align: center;
 }
