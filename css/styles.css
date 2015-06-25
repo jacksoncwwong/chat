@@ -85,10 +85,15 @@ html, body, section {
 	height: 100%;
 }
 
-a,
+/*a,
 a:hover,
 a:visited {
 	text-decoration: none;
+	color: rgb(101,155,247);
+}*/
+
+a:hover {
+	opacity: 0.6;
 }
 
 section {
@@ -96,6 +101,20 @@ section {
 	padding: 10px 0;
 	box-sizing: border-box;
 	text-align: center;
+}
+
+.btn,
+.btn:hover,
+.btn:visited {
+	text-decoration: none;
+	color: rgb(101,155,247);
+	display: inline-block;
+	padding: 5px 10px;
+	border: 1px solid rgb(101,155,247);
+}
+
+.btn:hover {
+	opacity: 0.6;
 }
 
 .logo {
@@ -157,7 +176,6 @@ section {
 #signup a,
 .user_info .username a {
 	font-size: 12px;
-	display: block;
 	margin-top: 10px;
 	font-weight: 700;
 }
@@ -204,6 +222,7 @@ section {
 	width: 100%;
 	margin-top: 20px;
 	min-height: 80px;
+	position: relative;
 }
 
 .chat_client .message .user {
@@ -241,7 +260,9 @@ section {
 }
 
 .chat_client .message .delete {
-
+	position: absolute;
+	bottom: 0;
+	right: 0;
 }
 
 .chat_client .message .messageID {
