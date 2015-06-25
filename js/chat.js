@@ -6,6 +6,7 @@ var site = "http://chat-app.brainstation.io";
 var chatDiv = $('.chat_client');
 var username = "";
 var currentMessages = [];
+var loggedIn = false;
 $('#signup a').click(function(){
 	$('#signup').css('display','none');
 	$('#login').css('display','block');
@@ -67,7 +68,9 @@ function getMessages() {
 				$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + element.username + '</div><div class="time">' + getReadableTime(element.timestamp) + '</div></div><div class="text"><p>' + element.message + '</p><a class="delete btn" href="#">Delete</a><div class="messageID">' +element.id+ '</div></div>');
 			});
 			$('.delete').click(function(event){ //binding listener to delete class
-				var deleteID= $(event.target).closest('#messageID').val();
+				var test = $(event.target);
+				console.log(test);
+				var deleteID= $(event.target).closest('.messageID');
 				console.log(deleteID);
 				// delete(deleteID);
 			});
@@ -107,7 +110,6 @@ function login() {
 		url: site + "/users/login",
 		type: "POST",
 		data: form.serialize(),
-		xhrFields: { withCredentials:true },
 		success: function(data) {
 			CURRENT_USER = data.uid;
 			$('#login').css('display','none');
@@ -117,7 +119,7 @@ function login() {
 			});
 			$('.username').css('display','inline-block');
 			getMessages();
-			setInterval(updateMessages(), 2000);
+			loggedIn = true;
 		},
 		error: function(data) {
 			console.log(data);
@@ -127,6 +129,11 @@ function login() {
 $('#login').on('submit', function(event){
 	login();
 });
+
+setInterval(function() { //this is going to run updateMessages every 2 seconds
+		updateMessages();
+}, 2000);
+
 
 // logout() logs out a user
 function logout() {
@@ -176,33 +183,39 @@ $('#signup').on('submit', function(event){
 //to array of messages on server, and will rewrite if array is completely different, 
 //or write in new messages
 function updateMessages() {
-	$.ajax({
-		url: site + "/messages",
-		type: "GET",
-		success: function(data) {
-			var diffMessages = diff(data, currentMessages);
-			if (diffMessages.length > 0) {
-				currentMessages.sort(sortTime);
-				var currentLength = currentMessages.length - 1;
-				if (diffMessages[0].timestamp < currentMessages[currentLength].timestamp) {
-					console.log("this is rewrite");
-					getMessages();
-				}
-				else {
-					for (var i=0; i<diffMessages.length; i++) {
-						console.log("no rewrite");
-						$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + diffMessages[i].username + '</div><div class="time">' + getReadableTime(diffMessages[i].timestamp) + '</div></div><div class="text"><p>' + diffMessages[i].message + '</p><a class="delete btn" href="#">Delete</a><div class="messageID">' +diffMessages[i].id+ '</div></div>');
-						currentMessages.push(diffMessages[i]);
-						scrollBottom(chatDiv, 1000);
+	if (loggedIn === true) {
+		$.ajax({
+			url: site + "/messages",
+			type: "GET",
+			success: function(data) {
+				var diffMessages = diff(data, currentMessages);
+				if (diffMessages.length > 0) {
+					currentMessages.sort(sortTime);
+					var currentLength = currentMessages.length - 1;
+					if (diffMessages[0].timestamp < currentMessages[currentLength].timestamp) {
+						console.log("this is rewrite");
+						getMessages();
+					}
+					else {
+						for (var i=0; i<diffMessages.length; i++) {
+							console.log("no rewrite");
+							$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + diffMessages[i].username + '</div><div class="time">' + getReadableTime(diffMessages[i].timestamp) + '</div></div><div class="text"><p>' + diffMessages[i].message + '</p><a class="delete btn" href="#">Delete</a><div class="messageID">' +diffMessages[i].id+ '</div></div>');
+							currentMessages.push(diffMessages[i]);
+							scrollBottom(chatDiv, 1000);
+						}
 					}
 				}
+			},
+			error: function(data) {
+				console.log(data);
 			}
-		},
-		error: function(data) {
-			console.log(data);
-		}
-	});
+		});
+	}
 }
+
+$('#testingUpdate').click(function(event){
+	updateMessages();
+})
 
 // HELPERS -------
 // You can use these and modify them to fit your needs. 
