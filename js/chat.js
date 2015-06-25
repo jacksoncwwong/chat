@@ -87,7 +87,10 @@ function login() {
 		success: function(data) {
 			CURRENT_USER = data.uid;
 			$('#login').css('display','none');
-			$('.username').append('Username: ' + username + '<a href="#" id="logout">Log Out</a>');
+			$('.username').html('Username: ' + username + '<a href="#" id="logout">Log Out</a>');
+			$('#logout').click(function(event){
+				logout();
+			});
 			$('.username').css('display','inline-block');
 			getMessages();
 			setInterval(updateMessages(), 2000);
@@ -120,9 +123,7 @@ function logout() {
 		}
 	});
 }
-$('#logout').click(function(event){
-	logout();
-});
+
 
 // signup() creates an account that we can sign in with
 function signup() {
