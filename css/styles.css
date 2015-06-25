@@ -87,6 +87,9 @@ html, body, section {
 
 section {
 	font-family: Roboto, 'Open Sans', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+	padding: 10px 0;
+	box-sizing: border-box;
+	text-align: center;
 }
 
 .logo {
@@ -103,8 +106,7 @@ section {
 .user_info {
 	background: rgba(0,0,0,0.2);
 	border-radius: 20px;
-	width: 40%;
-	margin: 10px auto;
+	margin: 0 auto;
 }
 
 .header {
@@ -122,7 +124,9 @@ section {
 
 .user_info {
 	text-align: center;
-	padding: 10px 0;
+	padding: 20px 20px;
+	margin: 10px auto;
+	display: inline-block;
 }
 
 #signup, 
@@ -164,8 +168,6 @@ section {
 }
 
 .user_info .username {
-	background: rgba(0,0,0,0.2);
-	padding: 5px 10px;
 	font-size: 16px;
 	color: white;
 	display: none;
@@ -182,6 +184,7 @@ section {
 	border-radius: 20px 20px 0 0;
 	overflow: auto;
 	position: relative;
+	text-align: left;
 }
 
 .chat_client .message {

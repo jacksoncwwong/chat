@@ -87,7 +87,7 @@ function login() {
 		success: function(data) {
 			CURRENT_USER = data.uid;
 			$('#login').css('display','none');
-			$('.username').append("Username: " + username);
+			$('.username').append('Username: ' + username + '<a href="#">Log Out</a>');
 			$('.username').css('display','inline-block');
 			getMessages();
 			setInterval(updateMessages(), 2000);
