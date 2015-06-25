@@ -151,7 +151,6 @@ function logout() {
 			$('.username').css('display','none');
 			$('#signup').css('display','block');
 			$('.chat_client').html('');
-			loggedIn = false;
 		},
 		error: function() {
 		}
