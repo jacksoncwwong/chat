@@ -66,10 +66,11 @@ function getMessages() {
 			data.forEach(function(element) {
 				$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + element.username + '</div><div class="time">' + getReadableTime(element.timestamp) + '</div></div><div class="text"><p>' + element.message + '</p><a class="delete btn" href="#">Delete</a><div class="messageID">' +element.id+ '</div></div>');
 			});
-			// $('.delete').click(function(event){ //binding listener to delete class
-			// 	var deleteID= .closest('#messageID').val();
-			// 	delete(deleteID);
-			// });
+			$('.delete').click(function(event){ //binding listener to delete class
+				var deleteID= $(event.target).closest('#messageID').val();
+				console.log(deleteID);
+				// delete(deleteID);
+			});
 			scrollBottom(chatDiv, 1000);
 		},
 		error: function(data) {
@@ -85,7 +86,13 @@ function getMessages() {
 // 	$.ajax({
 // 		url: site + "/messages/" + deleteID,
 // 		type: "DELETE",
-
+//		xhrFields: { withCredentials:true },
+		// success: function() {
+			
+		// },
+		// error: function() {
+			
+		// }
 // 	});
 	
 // }
