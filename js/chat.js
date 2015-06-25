@@ -68,11 +68,9 @@ function getMessages() {
 				$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + element.username + '</div><div class="time">' + getReadableTime(element.timestamp) + '</div></div><div class="text"><p>' + element.message + '</p><a class="delete btn" href="#">Delete</a><div class="messageID">' +element.id+ '</div></div>');
 			});
 			$('.delete').click(function(event){ //binding listener to delete class
-				var test = $(event.target);
-				console.log(test);
-				var deleteID= $(event.target).closest('.messageID');
+				var deleteID= $(event.target)[0].nextElementSibling.innerHTML;
 				console.log(deleteID);
-				// delete(deleteID);
+				deleteMessage(deleteID);
 			});
 			scrollBottom(chatDiv, 1000);
 		},
@@ -82,25 +80,24 @@ function getMessages() {
 	});
 }
 
+$('#tempUpdate').click(function(event){
+	updateMessages();
+});
+
 // delete() deletes the message
-// function delete(deleteID) {
-// 	event.preventDefault();
-
-// 	$.ajax({
-// 		url: site + "/messages/" + deleteID,
-// 		type: "DELETE",
-//		xhrFields: { withCredentials:true },
-		// success: function() {
-			
-		// },
-		// error: function() {
-			
-		// }
-// 	});
-	
-// }
-
-
+function deleteMessage(deleteID) {
+	$.ajax({
+		url: site + "/messages/" + deleteID,
+		type: "DELETE",
+		xhrFields: { withCredentials:true },
+		success: function() {
+			console.log("testing delete");
+		},
+		error: function(data) {
+			console.log(data);
+		}
+	});	
+}
 
 // login() logs in a user by creating a session
 function login() {
@@ -195,14 +192,22 @@ function updateMessages() {
 				if (diffMessages.length > 0) {
 					currentMessages.sort(sortTime);
 					var currentLength = currentMessages.length - 1;
+					console.log()
 					if (diffMessages[0].timestamp < currentMessages[currentLength].timestamp) {
 						console.log("this is rewrite");
 						getMessages();
+						conosole.log("SOmething new");
 					}
+					//the above code using diff() does not detect message deletion
 					else {
 						for (var i=0; i<diffMessages.length; i++) {
 							console.log("no rewrite");
 							$('.chat_client').append('<div class="message"><div class="user"><div class="user_img"><img src="img/minion.jpeg"></div><div class="username">' + diffMessages[i].username + '</div><div class="time">' + getReadableTime(diffMessages[i].timestamp) + '</div></div><div class="text"><p>' + diffMessages[i].message + '</p><a class="delete btn" href="#">Delete</a><div class="messageID">' +diffMessages[i].id+ '</div></div>');
+							$('.delete').click(function(event){ //binding listener to delete class
+								var deleteID= $(event.target)[0].nextElementSibling.innerHTML;
+								console.log(deleteID);
+								deleteMessage(deleteID);
+							});
 							currentMessages.push(diffMessages[i]);
 							scrollBottom(chatDiv, 1000);
 						}
