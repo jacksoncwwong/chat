@@ -99,6 +99,9 @@ function deleteMessage(deleteID) {
 	});	
 }
 
+// changeMessage() changes a message you've written
+
+
 // login() logs in a user by creating a session
 function login() {
 	event.preventDefault();
