@@ -100,6 +100,8 @@ function getMessages() {
 	
 // }
 
+
+
 // login() logs in a user by creating a session
 function login() {
 	event.preventDefault();
