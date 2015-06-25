@@ -85,16 +85,12 @@ html, body, section {
 	height: 100%;
 }
 
-/*a,
+a,
 a:hover,
 a:visited {
 	text-decoration: none;
-	color: rgb(101,155,247);
-}*/
-
-a:hover {
-	opacity: 0.6;
 }
+
 
 section {
 	font-family: Roboto, 'Open Sans', Arial, 'Helvetica Neue', Helvetica, sans-serif;
@@ -107,14 +103,20 @@ section {
 .btn:hover,
 .btn:visited {
 	text-decoration: none;
-	color: rgb(101,155,247);
 	display: inline-block;
 	padding: 5px 10px;
 	border: 1px solid rgb(101,155,247);
 }
 
+.btn {
+	color: white;
+	background: rgb(101,155,247);
+	font-size: 12px;
+}
+
 .btn:hover {
-	opacity: 0.6;
+	color: rgb(101,155,247);
+	background: transparent;
 }
 
 .logo {
@@ -173,11 +175,9 @@ section {
 	margin-bottom: 5px;
 }
 
-#signup a,
-.user_info .username a {
-	font-size: 12px;
+#signup .btn,
+.user_info .username .btn {
 	margin-top: 10px;
-	font-weight: 700;
 }
 
 #signup input, 
@@ -186,13 +186,13 @@ section {
 	display: inline-block;
 }
 
-#signup input[type="submit"], 
-#login input[type="submit"] {
+#signup > .btn, 
+#login > .btn {
 	width: auto;
-	padding: 5px 10px;
 	height: 34px;
 	box-sizing: border-box;
 	vertical-align: top;
+	margin-top: 0;
 }
 
 #login {
@@ -243,6 +243,10 @@ section {
 	color: #2b96fe;
 	margin-left: 100px;
 	margin-bottom: 10px;
+}
+
+.chat_client .username .btn {
+	margin-top: 0;
 }
 
 .chat_client .time {

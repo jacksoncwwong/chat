@@ -98,7 +98,7 @@ function login() {
 		success: function(data) {
 			CURRENT_USER = data.uid;
 			$('#login').css('display','none');
-			$('.username').html('Username: ' + username + '<a href="#" id="logout" class="btn">Log Out</a>');
+			$('.username').html('Username: ' + username + '<div><a href="#" id="logout" class="btn">Log Out</a></div');
 			$('#logout').click(function(event){
 				logout();
 			});
